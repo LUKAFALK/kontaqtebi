@@ -59,6 +59,7 @@ public class adapter extends BaseAdapter {
 
         convertView.setOnClickListener(v -> {
             Intent i = new Intent(context, meore.class);
+            i.putExtra("id", c.getId());
             i.putExtra("name", c.getName());
             i.putExtra("phone", c.getPhone());
             context.startActivity(i);

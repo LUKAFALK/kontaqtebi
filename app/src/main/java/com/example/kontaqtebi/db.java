@@ -39,6 +39,32 @@ public class db  extends SQLiteOpenHelper {
         db.insert("contacts", null, cv);
     }
 
+    public boolean updateContact(int id, String name, String phone) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("name", name);
+        cv.put("phone", phone);
+
+        int result = db.update(
+                "contacts",
+                cv,
+                "id = ?",
+                new String[]{String.valueOf(id)}
+        );
+
+        return result > 0;
+    }
+
+    public boolean deleteContact(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(
+                "contacts",
+                "id = ?",
+                new String[]{String.valueOf(id)}
+        );
+        return result > 0;
+    }
+
     public ArrayList<contact> getContacts() {
         ArrayList<contact> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
